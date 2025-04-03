@@ -1,13 +1,17 @@
 from flask import render_template, current_app as app
 
 @app.route('/')
-def home_route():
-    return "<h1>Home Page!</h1>"
+def home():
+    return render_template('index.html')
 
-@app.route('/portfolio')
-def portfolio():
-    return "<h1>Portfolio</h1>"
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/projects')
+def projects():
+    return render_template('projects.html')
 
 @app.route('/contact')
 def contact():
-    return "<h1>Contact</h1>"
+    return render_template('contact.html')

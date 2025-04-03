@@ -6,6 +6,6 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
 
     with app.app_context():
-        from . import routes
+        from app import routes
 
     return app
