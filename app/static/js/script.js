@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
   const stickyNavbarContainer = document.getElementById('sticky-navbar-container');
-  const header = document.getElementById('main-header');
-
   if (!stickyNavbarContainer) return;
 
   let lastScrollY = window.scrollY;
@@ -9,13 +7,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
   window.addEventListener('scroll', function() {
     const currentScrollY = window.scrollY;
+    let isScrollingUp = currentScrollY < lastScrollY;
+    let isScrollingDown = currentScrollY > lastScrollY;
 
-    if (currentScrollY > lastScrollY && currentScrollY > hideThreshold) {
+    if (isScrollingDown && currentScrollY > hideThreshold) {
       stickyNavbarContainer.classList.add('navbar-hidden');
-    } else if (currentScrollY < lastScrollY) {
+    } else if (isScrollingUp || currentScrollY <= hideThreshold ) {
       stickyNavbarContainer.classList.remove('navbar-hidden');
     }
 
+    if (currentScrollY > hideThreshold && !stickyNavbarContainer.classList.contains('navbar-hidden')) {
+       stickyNavbarContainer.classList.add('navbar-scrolled-visible');
+    } else {
+       stickyNavbarContainer.classList.remove('navbar-scrolled-visible');
+    }
+
+
     lastScrollY = Math.max(0, currentScrollY);
   });
+});
+
+window.addEventListener('load', function() {
+  console.log("Window loaded, scrolling to top.");
+  window.scrollTo(0, 0);
 });
