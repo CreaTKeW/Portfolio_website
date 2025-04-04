@@ -1,6 +1,9 @@
 import datetime
+import os
 from flask import render_template, redirect, url_for, flash, current_app as app
 from app.forms import ContactForm
+from flask_mail import Message
+from app import mail
 
 
 @app.context_processor
@@ -29,9 +32,33 @@ def contact():
         phone = form.phone.data
         message = form.message.data
 
-        print(f"Wiadomość od: {name} ({email}), Tel: {phone}")
-        print(f"Treść: {message}")
+        recipient_email = os.getenv('MAIL_RECIPIENT') or app.config['MAIL_DEFAULT_SENDER']
 
-        flash('Your message has been successfully sent.', 'success')
+        try:
+            msg = Message(
+                subject=f"New message from: {name}",
+                sender=app.config['MAIL_DEFAULT_SENDER'],
+                recipients=[recipient_email],
+                reply_to=email
+            )
+            msg.body = f"""
+                   Recived a new message from contact form:
+
+                   From: {name}
+                   Email: {email}
+                   Phone number: {phone if phone else 'Not provided'}
+
+                   Message:
+                   {message}
+                   """
+
+            mail.send(msg)
+
+            flash('Your message has been successfully sent!', 'success')
+
+        except Exception as e:
+            app.logger.error(f"Error while sending a message: {e}")
+            flash('Error has occurred while trying to send a message. Try again later.', 'danger')
+
         return redirect(url_for('contact'))
     return render_template('contact.html', form=form)
