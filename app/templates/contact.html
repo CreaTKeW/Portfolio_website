@@ -1,5 +1,82 @@
 {% extends 'base.html' %}
 {% block title %}Contact{% endblock %}
 {% block content %}
-    <h1>Contact Page</h1>
+<div class="container my-5">
+    <h2 class="text-center mb-4">Get in touch with me</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category if category else 'info' }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+
+    <form method="POST" action="{{ url_for('contact') }}" novalidate>
+        {{ form.hidden_tag() }}
+
+        {# Name #}
+        <div class="mb-3">
+            {{ form.name.label(class="form-label") }}
+            {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else ""), placeholder="Name") }}
+            {% if form.name.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.name.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        {# Email #}
+        <div class="mb-3">
+            {{ form.email.label(class="form-label") }}
+            {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""), placeholder="email@example.com") }}
+            {% if form.email.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        {# Phone #}
+        <div class="mb-3">
+            {{ form.phone.label(class="form-label") }}
+            {{ form.phone(class="form-control" + (" is-invalid" if form.phone.errors else ""), placeholder="+48 123 456 789") }}
+            {% if form.phone.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.phone.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        {# Message #}
+        <div class="mb-3">
+            {{ form.message.label(class="form-label") }}
+            {{ form.message(class="form-control" + (" is-invalid" if form.message.errors else ""), rows="5", placeholder="Your message...") }}
+            {% if form.message.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.message.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        {# Submit #}
+        <div class="d-grid gap-2 col-6 mx-auto">
+             {{ form.submit(class="btn btn-outline-light btn-lg") }}
+        </div>
+
+    </form>
+
+</div>
 {% endblock %}

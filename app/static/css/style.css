@@ -1,7 +1,8 @@
+.skill-category-hover-item:hover,
 .gradient-background {
-  background: linear-gradient(300deg, #1a1a1a, #333333, #1a1a1a);
-  background-size: 180% 180%;
-  animation: gradient-animation 18s ease infinite;
+  background: linear-gradient(300deg, #1a1a1a, #282828, #444444, #555555, #444444, #282828, #1a1a1a);
+  background-size: 200% 200%;
+  animation: gradient-animation 20s ease infinite;
 }
 
 @keyframes gradient-animation {
@@ -66,8 +67,10 @@ body.gradient-background {
   transform: translateY(-100%);
 }
 
-#sticky-navbar-container.scrolled-container {
+#sticky-navbar-container.navbar-scrolled-visible {
   background-color: #1a1a1a !important;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 #main-header {
@@ -85,5 +88,31 @@ body.gradient-background {
   background-color: #1a1a1a;
   border-radius: 15px;
   padding: 2rem;
-  color: #ffffff;*/
+  color: #ffffff;
+}
+
+.skill-category-hover-item {
+    transition: background-color 0.2s ease-in-out;
+}
+
+.skill-category-heading {
+    cursor: pointer;
+}
+
+.skills-badges-container {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+
+    transition: opacity 0.35s ease-out, max-height 0.35s ease-out, visibility 0s linear 0.35s, margin-top 0.35s ease-out;
+    margin-top: 0;
+}
+
+.skill-category-hover-item:hover .skills-badges-container {
+    opacity: 1;
+    max-height: 500px;
+    visibility: visible;
+    transition: opacity 0.35s ease-in, max-height 0.35s ease-in, visibility 0s linear 0s, margin-top 0.35s ease-in;
+    margin-top: 1rem;
 }
