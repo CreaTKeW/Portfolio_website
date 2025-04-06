@@ -17,19 +17,29 @@
   <div id="sticky-navbar-wrapper" class="sticky-top">
     <div class="container">
       <div id="sticky-navbar-container">
-        <header id="main-header" class="d-flex flex-wrap justify-content-center py-3 border-bottom navbar-slide-down">
-           <ul class="nav justify-content-center">
-            <li class="nav-item"><a href="{{ url_for('home') }}" class="btn btn-outline-light btn-lg mx-4 inter-font">Home</a></li>
-            <li class="nav-item"><a href="{{ url_for('about') }}" class="btn btn-dark btn-lg mx-4 inter-font">About Me</a></li>
-            <li class="nav-item"><a href="{{ url_for('projects') }}" class="btn btn-dark btn-lg mx-4 inter-font">Projects</a></li>
-            <li class="nav-item"><a href="{{ url_for('contact') }}" class="btn btn-dark btn-lg mx-4 inter-font">Contact</a></li>
-          </ul>
-        </header>
-     </div>
-  </div>
-</div>
+        <nav id="main-header" class="navbar navbar-expand-lg navbar-dark navbar-slide-down">
+          <div class="container-fluid">
 
-<div class="container mt-4">  <div class="content-background">{% block content %}{% endblock %}</div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link mx-2 inter-font {% if request.endpoint == 'home' %}active{% endif %}" href="{{ url_for('home') }}" {% if request.endpoint == 'home' %}aria-current="page"{% endif %}>Home</a></li>
+                <li class="nav-item"><a class="nav-link mx-2 inter-font {% if request.endpoint == 'about' %}active{% endif %}" href="{{ url_for('about') }}" {% if request.endpoint == 'about' %}aria-current="page"{% endif %}>About Me</a></li>
+                <li class="nav-item"><a class="nav-link mx-2 inter-font {% if request.endpoint == 'projects' %}active{% endif %}" href="{{ url_for('projects') }}" {% if request.endpoint == 'projects' %}aria-current="page"{% endif %}>Projects</a></li>
+                <li class="nav-item"><a class="nav-link mx-2 inter-font {% if request.endpoint == 'contact' %}active{% endif %}" href="{{ url_for('contact') }}" {% if request.endpoint == 'contact' %}aria-current="page"{% endif %}>Contact</a></li>
+              </ul>
+            </div>
+
+            </div>
+        </nav>
+        </div>
+    </div>
+  </div>
+
+<div class="container">  <div class="content-background">{% block content %}{% endblock %}</div>
 </div>
 
   <div class="container">

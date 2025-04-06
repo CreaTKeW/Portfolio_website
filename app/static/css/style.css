@@ -116,3 +116,19 @@ body.gradient-background {
     transition: opacity 0.35s ease-in, max-height 0.35s ease-in, visibility 0s linear 0s, margin-top 0.35s ease-in;
     margin-top: 1rem;
 }
+
+.navbar-nav .nav-link {
+    font-size: 1.4rem;
+    padding-top: 1.4rem;
+    padding-bottom: 1.4rem;
+}
+
+.navbar-dark .navbar-nav .nav-link.active{
+    color: #ffffff !important;
+    /* font-weight: bold; */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
