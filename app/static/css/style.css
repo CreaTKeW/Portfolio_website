@@ -128,7 +128,8 @@ body.gradient-background {
     /* font-weight: bold; */
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+.card-img-top {
+  width: 100%; /* Full width */
+  height: 300px; /* Fixed height */
+  object-fit: cover; /* Keep proportions */
 }
